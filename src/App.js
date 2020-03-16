@@ -55,7 +55,8 @@ class App extends React.Component {
         })
             .then(response => response.text())
             .then(data => {
-                botResponce.text = data;
+                if(data) botResponce.text = data;
+                else botResponce.text = "Something is not right. Please try again";
                 botResponce.author = this.bot;
                 this.setState(prevState => ({
                     messages: [
@@ -64,6 +65,7 @@ class App extends React.Component {
                     ]
                 }));
             })
+            .catch(err => console.log("error", err));
     };
 
     render() {
